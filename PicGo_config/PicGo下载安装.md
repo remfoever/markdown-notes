@@ -18,12 +18,5 @@
 
 [Typora结合PicGo + 使用Github搭建个人免费图床_picgo整合typora-CSDN博客](https://blog.csdn.net/qq_39921135/article/details/136278309)
 
-私人令牌
 
-gitee
 
-d9ac4dde88fda9011dc95eeb4a29e93a
-
-github
-
-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
