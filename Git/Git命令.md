@@ -245,9 +245,85 @@ git merge origin/main
 
 
 
+# 锋哥git使用教程
+
+```bash
+git add .
+git commit -m "my modify"
+    
+git pull		//拉取最新分支
+git checkout -b personal/zhangfeng/uart
+
+vi wx_main.c
+
+//esc退出编辑，:wq
+
+
+git status
+
+git add .
+
+//创建两个新文件
+vi a.c
+vi b.c
+//查看修改了哪些文件
+git status
+
+git add a.c
+git add b.c
+//不想修改了，回退本地上一个版本
+git restore --staged a.c
+
+
+//上交本地仓库
+git commit -m "i add two file and modify the wx_main.c"
+
+//查找日志
+git log
+
+//压缩日志
+git rebase -i HEAD-3  (压缩几条命令)
+
+//再次上传
+git push
+
+//强推到远端
+git push -f 
+
+
+//切到主线分支
+git checkout master
+git pull
+
+
+git merge master
+git status
+
+
+git merge --commit
 
 
 
+//rebase方法解决冲突
+
+git checkout master
+git pull
+git checkout personal/zhangfeng
+git rebase master
+
+
+//删除分支
+git branch -D 分支名
+
+
+
+
+
+```
+
+
+
+![image-20250217232855769](Git%E5%91%BD%E4%BB%A4.assets/image-20250217232855769.png)
 
 
 

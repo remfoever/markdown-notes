@@ -66,12 +66,6 @@ portBASE_TYPE 前缀x
 
 
 
-## 创建工程
-
-![5eb4d59f1741d6c455362350d06600e](https://raw.githubusercontent.com/remfoever/md_image_repo/main/5eb4d59f1741d6c455362350d06600e.jpg)
-
-
-
 
 
 
