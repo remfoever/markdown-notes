@@ -51,6 +51,41 @@ UINT32 WX_UART_DRIVER_Configure(WxUartDriver *this, WxUartDriverCfg *cfg)
 
 
 
+设置中断系统
+
+```c
+UINT32 WX_UART_DRIVER_SetupInterruptSystem(
+    WxUartDriver *this, WxUartDriverCfg *cfg,
+    VOID (*handLer)(VOID *callBackRef, UINT32 event, UINT32 eventData))
+{
+    /* Initialize the interrupt controller */
+    XUartPs *uartInstPtr = &this->uartInst;
+    XScuGic *intcPtr = WX_GetScuGicInstance();
+    if (intcPtr == NULL) {
+        return WX_UART_DRIVER_INTC_INIT_FAIL;
+    }
+    /* Connect the interrupt signal to the handler function */
+    int status = XScuGic_Connect(intcPtr, cfg->intrId,
+                                 (Xil_ExceptionHandler)XUartPs_InterruptHandler,
+                                 uartInstPtr);
+    if (status != WX_SUCCESS) {
+        return WX_UART_DRIVER_INTC_CONNECT_FAIL;
+    }
+    /*
+     * Set the handler function for the interrupt signal. The handler function
+     * will be called when the interrupt signal is asserted.
+     */
+    XUartPs_SetHandler(uartInstPtr, (XUartPs_Handler)handLer, this);
+    /* Enable the interrupt signal */
+    XUartPs_SetInterruptMask(uartInstPtr, XUARTPS_IXR_RXOVR | XUARTPS_IXR_TOUT |
+                                              XUARTPS_IXR_OVER);
+    XUartPs_SetRecvTimeout(uartInstPtr, 8);
+    /* Enable the interrupt in the interrupt controller */
+    XScuGic_Enable(intcPtr, cfg->intrId);
+    return WX_SUCCESS;
+}
+```
+
 
 
 
